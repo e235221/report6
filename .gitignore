@@ -3,3 +3,30 @@
 
 # Ignore Gradle build output directory
 build
+
+# Gradle関連の一時ファイル・キャッシュ
+.gradle/
+app/.gradle/
+
+# ビルド成果物
+app/build/
+build/
+
+# macOSシステムファイル
+.DS_Store
+
+# IDE関連ファイル
+.idea/
+workspaceState.state.json
+workbenchi.tree.indent.state.json
+
+# コンパイル済みファイル
+*.class
+*.bin
+
+# テスト結果・レポート
+app/build/reports/
+app/build/test-results/
+
+# 一時ディレクトリ
+app/build/tmp/
