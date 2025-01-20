@@ -1,0 +1,78 @@
+{
+  "workspaceFoldersFilePaths": [
+    "./"
+  ],
+  "symbols": [],
+  "activeFileDiagnostics": [
+    {
+      "start": {
+        "line": 50,
+        "character": 42
+      },
+      "end": {
+        "line": 50,
+        "character": 49
+      },
+      "message": "\"uryukyu\": Unknown word.",
+      "severity": 2
+    },
+    {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      },
+      "message": "The build file has been changed and may need reload to make it effective.",
+      "severity": 2
+    }
+  ],
+  "activeTextEditor": {
+    "selections": [
+      {
+        "anchor": {
+          "line": 69,
+          "character": 1
+        },
+        "active": {
+          "line": 69,
+          "character": 1
+        },
+        "isReversed": true
+      }
+    ],
+    "documentFilePath": "./app/build.gradle.kts",
+    "visibleRanges": [
+      {
+        "start": {
+          "line": 55,
+          "character": 0
+        },
+        "end": {
+          "line": 70,
+          "character": 0
+        }
+      }
+    ],
+    "languageId": "gradle-kotlin-dsl"
+  },
+  "debugConsoleOutput": "",
+  "terminalBuffer": "│       │   │   └── 7y3w3i81d4xzn9w3fwf2kccbs\r\n│       │   │       └── configuration-cache-report.html\r\n│       │   └── f4oq14wkrwl3djn0lidzhcfai\r\n│       │       └── 3qjo0d547294hsre2pcuhynu4\r\n│       │           └── configuration-cache-report.html\r\n│       └── problems\r\n│           └── problems-report.html\r\n├── gradle\r\n│   ├── libs.versions.toml\r\n│   └── wrapper\r\n│       ├── gradle-wrapper.jar\r\n│       └── gradle-wrapper.properties\r\n├── gradle.properties\r\n├── gradlew\r\n├── gradlew.bat\r\n├── report6_final.md\r\n└── settings.gradle.kts\r\n\r\n82 directories, 41 files\r\n\n%                                                                                                                                                                                                                                  \r \r\u001b]2;DMacBook-Air: /Users/yamawakidaiki/prog2/report6\u0007\u001b]633;D;0\u0007\u001b]633;P;Cwd=/Users/yamawakidaiki/prog2/report6\u0007\r\u001b]633;A\u0007(base) yamawakidaiki@DMacBook-Air report6 % \u001b]633;B\u0007\nc\bcle\na\nr\n\r\r\n\n\u001b]633;E;clear;715a2962-7415-4790-bf15-6efb486a54ea\u0007\u001b]633;C\u0007\n%                                                                                                                                                                                                                                  \r \r\u001b]2;DMacBook-Air: /Users/yamawakidaiki/prog2/report6\u0007\u001b]633;D;0\u0007\u001b]633;P;Cwd=/Users/yamawakidaiki/prog2/report6\u0007\r\u001b]633;A\u0007(base) yamawakidaiki@DMacBook-Air report6 % \u001b]633;B\u0007\n./gradlew clean build\n./gradlew clean build\r\r\n\n\u001b]633;E;./gradlew clean build;715a2962-7415-4790-bf15-6efb486a54ea\u0007\u001b]633;C\u0007\n\r\n\n<-------------> 0% INITIALIZING [90ms]\n<-------------> 0% INITIALIZING [189ms]\nCalculating task graph as no cached configuration is available for tasks: clean build\r\n\r\n\r\n<-------------> 0% INITIALIZING [288ms]> Evaluating settings\n<-------------> 0% INITIALIZING [392ms]\n<-------------> 0% INITIALIZING [489ms]\n<-------------> 0% INITIALIZING [592ms]\n<-------------> 0% INITIALIZING [726ms]\n<-------------> 0% INITIALIZING [788ms]\n<-------------> 0% INITIALIZING [892ms]\n<-------------> 0% INITIALIZING [992ms]\n<-------------> 0% INITIALIZING [1s]\n<-------------> 0% INITIALIZING [2s]\n<-------------> 0% CONFIGURING [2s]> Resolve dependencies of incomingCatalogForLibs0\n> IDLE\n> root project\n<======-------> 50% CONFIGURING [2s]> :app > Compiling build file 'app/build.gradle.kts'\n<======-------> 50% CONFIGURING [3s]\n<======-------> 50% CONFIGURING [4s]\n<======-------> 50% CONFIGURING [5s]\n\r\n> Configure project :app\r\ne: file://./app/build.gradle.kts:67:13: Val cannot be reassigned\r\ne: file://./app/build.gradle.kts:67:23: Type mismatch: inferred type is Array<Char> but (Mutable)Set<File!>! was expected\r\ne: file://./app/build.gradle.kts:67:23: Unsupported [Collection literals outside of annotations]\r\ne: file://./app/build.gradle.kts:67:24: Too many characters in a character literal ''src/main/java''\r\n\r\nFAILURE: Build failed with an exception.\r\n\r\n* Where:\r\n\r\n\r\n<=============> 100% CONFIGURING [5s]> IDLEBuild file './app/build.gradle.kts' line: 67\r\n\r\n* What went wrong:\r\nScript compilation errors:\r\n\r\n  Line 67:             srcDirs = ['src/main/java']\r\n                       ^ Val cannot be reassigned\r\n\r\n  Line 67:             srcDirs = ['src/main/java']\r\n                                 ^ Type mismatch: inferred type is Array<Char> but (Mutable)Set<File!>! was expected\r\n\r\n  Line 67:             srcDirs = ['src/main/java']\r\n                                 ^ Unsupported [Collection literals outside of annotations]\r\n\r\n  Line 67:             srcDirs = ['src/main/java']\r\n                                  ^ Too many characters in a character literal ''src/main/java''\r\n\r\n4 errors\r\n\r\n* Try:\r\n> Run with --stacktrace option to get the stack trace.\r\n> Run with --info or --debug option to get more log output.\r\n> Run with --scan to get full insights.\r\n> Get more help at https://help.gradle.org.\r\n\r\nBUILD FAILED in 5s\r\nC\nonfiguration cache entry stored.\r\n\r\n\r\n<-------------> 0% WAITING> IDLE\n\n%                                                                                                                                                                                                                                  \r \r\u001b]2;DMacBook-Air: /Users/yamawakidaiki/prog2/report6\u0007\u001b]633;D;1\u0007\u001b]633;P;Cwd=/Users/yamawakidaiki/prog2/report6\u0007\n\r\u001b]633;A\u0007(base) yamawakidaiki@DMacBook-Air report6 % \u001b]633;B\u0007\nls build/classes/java/main\nls build/classes/java/main\r\r\n\n\u001b]633;E;ls build/classes/java/main;715a2962-7415-4790-bf15-6efb486a54ea\u0007\u001b]633;C\u0007\nls: build/classes/java/main: No such file or directory\r\n%                                                                                                                                                                                                                                  \r \r\u001b]2;DMacBook-Air: /Users/yamawakidaiki/prog2/report6\u0007\u001b]633;D;1\u0007\u001b]633;P;Cwd=/Users/yamawakidaiki/prog2/report6\u0007\r\u001b]633;A\u0007(base) yamawakidaiki@DMacBook-Air report6 % \u001b]633;B\u0007",
+  "terminalLastCommand": {
+    "commandLine": "ls build/classes/java/main",
+    "cwd": "/Users/yamawakidaiki/prog2/report6",
+    "exitCode": 1,
+    "output": "ls: build/classes/java/main: No such file or directory\n"
+  },
+  "terminalSelection": "",
+  "terminalShellType": "bash",
+  "repoContexts": [],
+  "notebookDocumentFilePaths": [],
+  "textDocumentFilePaths": [
+    "app/src/main/java/jp/ac/uryukyu/ie/e235221/WeatherSolver.java",
+    "app/src/test/java/jp/ac/uryukyu/ie/e235221/WeatherSolverTest.java",
+    "app/build.gradle.kts"
+  ]
+}
