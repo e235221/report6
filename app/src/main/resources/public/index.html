@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天気予報アプリ</title>
+</head>
+<body>
+    <h1>天気予報を取得</h1>
+    <form action="/weather" method="get">
+        <label for="city">都市名:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">取得</button>
+    </form>
+
+    <div>
+        <h2>天気情報</h2>
+        <p id="weather-info"></p>
+    </div>
+</body>
+</html>

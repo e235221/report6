@@ -31,12 +31,13 @@ dependencies {
     implementation("com.sparkjava:spark-core:2.9.4")
 
     // Other application dependencies
-    implementation(libs.guava)
-}
+    // implementation(libs.guava)
+	implementation("com.google.guava:guava:32.0.1-jre")
 
+}
 application {
     // Define the main class for the application.
-    mainClass = "jp.ac.uryukyu.ie.e235221.WeatherSolver"
+    mainClass = "jp.ac.uryukyu.ie.e235221.Main"
 }
 
 tasks.named<Test>("test") {
@@ -46,7 +47,7 @@ tasks.named<Test>("test") {
 
 tasks.withType<Jar> {
     manifest {
-        attributes["Main-Class"] = "jp.ac.uryukyu.ie.e235221.WeatherSolver"
+        attributes["Main-Class"] = "jp.ac.uryukyu.ie.e235221.Main"
     }
 }
 
