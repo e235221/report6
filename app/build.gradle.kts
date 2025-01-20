@@ -19,10 +19,18 @@ repositories {
 
 dependencies {
     // Use JUnit Jupiter for testing.
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.0")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-    // This dependency is used by the application.
+    // Mockito for mocking in tests
+    testImplementation("org.mockito:mockito-core:4.0.0")
+
+    // Use Gson and Spark for the application
+    implementation("com.google.code.gson:gson:2.8.9")
+    implementation("com.sparkjava:spark-core:2.9.4")
+
+    // Other application dependencies
     implementation(libs.guava)
 }
 
