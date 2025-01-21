@@ -1,50 +1,38 @@
 package jp.ac.uryukyu.ie.e235221;
 
 import static spark.Spark.*;
+import spark.Request;
+import spark.Response;
 
+/**
+ * Webアプリケーションのエントリポイント。
+ * Spark Javaを用いてサーバを起動し，
+ * /weather エンドポイントで天気情報(HTML)を返す。
+ */
 public class Main {
+	/**
+	 * メインメソッド。
+	 * 
+	 * @param args コマンドライン引数(未使用)
+	 */
 	public static void main(String[] args) {
-		WeatherSolver solver = new WeatherSolver();
-
-		// 静的ファイルの場所を設定（HTMLファイルなどを保存する場所）
+		// 静的ファイルを src/main/resources/public から配信
 		staticFiles.location("/public");
 
-		// 天気情報を取得するエンドポイント
-		get("/weather", (req, res) -> {
-			// 都市名をクエリパラメータから取得
+		// GET /weather
+		get("/weather", (Request req, Response res) -> {
 			String cityName = req.queryParams("city");
 			if (cityName == null || cityName.isEmpty()) {
-				// 都市名が指定されていない場合
-				return "<h1>都市名を指定してください。例: /weather?city=Tokyo</h1>";
+				return "<p>都市名が指定されていません。</p>";
 			}
 			try {
-				// 天気情報を取得
-				String weatherData = solver.fetchWeatherData(cityName);
-				// 天気情報をHTML形式に整形
-				String weatherHtml = solver.parseWeatherData(weatherData);
-
-				// --- ここから修正 ---
-				// 取得した天気情報を見やすく表示するため，
-				// HTML全体を組み立てて返すように修正
-				String resultHtml = "<!DOCTYPE html>"
-						+ "<html lang='ja'>"
-						+ "<head>"
-						+ "<meta charset='UTF-8'>"
-						+ "<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
-						+ "<title>" + cityName + "の天気</title>"
-						+ "<link rel='stylesheet' href='/css/style.css'>" // CSSファイルの読み込み
-						+ "</head>"
-						+ "<body>"
-						+ "<h1>" + cityName + "の天気情報</h1>"
-						+ weatherHtml // parseWeatherDataで組み立てた天気情報ブロック
-						+ "</body>"
-						+ "</html>";
-				// --- ここまで修正 ---
-
-				return resultHtml;
+				WeatherSolver solver = new WeatherSolver();
+				// JSONデータを取得してページ全体を生成
+				String jsonData = solver.fetchWeatherData(cityName);
+				String html = solver.generateWeatherPage(jsonData);
+				return html;
 			} catch (Exception e) {
-				res.status(500);
-				return "<h1>エラーが発生しました: " + e.getMessage() + "</h1>";
+				return "<p>天気情報の取得でエラーが発生しました: " + e.getMessage() + "</p>";
 			}
 		});
 	}

@@ -7,23 +7,29 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * 天気情報を取得・解析し，HTMLページを組み立てるクラス。
+ */
 public class WeatherSolver {
-	private final String apiKey = "95fd222d42414788aa8152259242610"; // WeatherAPIのAPIキー
+	private final String apiKey = "95fd222d42414788aa8152259242610";
 
 	/**
-	 * 天気データを取得するメソッド.
-	 *
+	 * 指定した都市の天気データ(JSON形式)を取得するメソッド。
+	 * 
 	 * @param cityName 都市名
-	 * @return JSON形式の天気データ
-	 * @throws Exception 接続やデータ取得時の例外
+	 * @return JSON文字列(天気情報)
+	 * @throws Exception 通信時の例外
 	 */
 	public String fetchWeatherData(String cityName) throws Exception {
-		String endpoint = String.format("http://api.weatherapi.com/v1/current.json?key=%s&q=%s", apiKey, cityName);
+		String endpoint = String.format(
+				"http://api.weatherapi.com/v1/current.json?key=%s&q=%s",
+				apiKey, cityName);
 		URL url = new URL(endpoint);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestMethod("GET");
 
-		BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+		BufferedReader reader = new BufferedReader(
+				new InputStreamReader(connection.getInputStream()));
 		StringBuilder response = new StringBuilder();
 		String line;
 		while ((line = reader.readLine()) != null) {
@@ -33,16 +39,11 @@ public class WeatherSolver {
 		return response.toString();
 	}
 
-	// --- ここから修正 ---
 	/**
-	 * 取得した天気データを解析し，HTML文字列を生成するメソッド.
-	 * ・天気と現在の気温はそのまま出力
-	 * ・風速，風向き，湿度，気圧，体感温度，降水量はそれぞれ個別の
-	 * <p>
-	 * タグで出力
-	 * ・その下部にWindy APIを用いた風の動きがわかるアニメーション地図を表示する
-	 *
-	 * ※ Windy APIのキーは，YOUR_WINDY_API_KEY を実際のキーに置き換えてください。
+	 * JSON文字列を解析し，天気情報のHTML断片を生成するメソッド。
+	 * 
+	 * @param jsonData 天気APIから取得したJSON文字列
+	 * @return HTMLのbody部分相当(天気情報を表示するdivなど)
 	 */
 	public String parseWeatherData(String jsonData) {
 		// JSONをパース
@@ -50,7 +51,6 @@ public class WeatherSolver {
 		JsonObject current = jsonObject.getAsJsonObject("current");
 		JsonObject condition = current.getAsJsonObject("condition");
 
-		// 各データを抽出
 		double temperature = current.get("temp_c").getAsDouble();
 		String weatherCondition = condition.get("text").getAsString();
 		double windSpeed = current.get("wind_kph").getAsDouble();
@@ -60,9 +60,7 @@ public class WeatherSolver {
 		double feelsLike = current.get("feelslike_c").getAsDouble();
 		double precip = current.get("precip_mm").getAsDouble();
 
-		// HTML文字列を生成
-		// ※ ここではテストや既存の出力形式に影響がない範囲で，
-		// 各気象情報を個別の<p>タグに分け，その下部にWindy API用の地図領域を配置しています。
+		// アイコン(emoji)はCSSの :before で付与される
 		return String.format(
 				"<div class='weather-info'>" +
 						"<h2>現在の天気: <span class='weather-condition'>%s</span></h2>" +
@@ -75,16 +73,44 @@ public class WeatherSolver {
 						"<p>体感温度: <span class='feels-like'>%.1f°C</span></p>" +
 						"<p>降水量: <span class='precip'>%.1f mm</span></p>" +
 						"</div>" +
-						// Windy APIによる風の動きがわかるアニメーション地図の表示領域（下部に配置）
 						"<div id='windy-map' style='width: 100%%; height: 400px; margin-top: 20px;'></div>" +
 						"<script src='https://api.windy.com/assets/map-forecast.js'></script>" +
 						"<script>" +
-						// 以下のオプションは任意で変更可能です（例：表示する座標やズームレベル）
 						"const options = { key: 'YOUR_WINDY_API_KEY', verbose: false, lat: 35, lon: 139, zoom: 5 };" +
 						"windyInit(options, document.getElementById('windy-map'));" +
 						"</script>" +
 						"</div>",
-				weatherCondition, temperature, windSpeed, windDirection, humidity, pressure, feelsLike, precip);
+				weatherCondition, temperature, windSpeed, windDirection,
+				humidity, pressure, feelsLike, precip);
 	}
-	// --- ここまで修正 ---
+
+	/**
+	 * JSON文字列を受け取り，HTMLページ全体を生成するメソッド。
+	 * parseWeatherData()で生成した内容を，<html>～</html>で包む。
+	 * 
+	 * @param jsonData 天気APIから取得したJSON文字列
+	 * @return 完全なHTMLページ
+	 */
+	public String generateWeatherPage(String jsonData) {
+		// まず天気情報のメイン部分(断片HTML)を得る
+		String weatherBody = parseWeatherData(jsonData);
+
+		// ページとして完成させる
+		// css/style.css を読み込む<link>を含む<head>を返す
+		return String.format(
+				"<!DOCTYPE html>" +
+						"<html lang='ja'>" +
+						"<head>" +
+						"  <meta charset='UTF-8'>" +
+						"  <meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
+						"  <title>天気予報の結果</title>" +
+						"  <link rel='stylesheet' href='/css/style.css'>" +
+						"</head>" +
+						"<body>" +
+						"  <h1>天気予報の結果</h1>" +
+						"  %s" +
+						"</body>" +
+						"</html>",
+				weatherBody);
+	}
 }
