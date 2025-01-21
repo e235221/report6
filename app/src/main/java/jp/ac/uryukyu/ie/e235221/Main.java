@@ -6,7 +6,7 @@ public class Main {
 	public static void main(String[] args) {
 		WeatherSolver solver = new WeatherSolver();
 
-		// 静的ファイル：HTMLファイルなどを保存する場所の設定
+		// 静的ファイルの場所を設定（HTMLファイルなどを保存する場所）
 		staticFiles.location("/public");
 
 		// 天気情報を取得するエンドポイント
@@ -48,5 +48,4 @@ public class Main {
 			}
 		});
 	}
-
 }

@@ -75,18 +75,16 @@ public class WeatherSolver {
 						"<p>体感温度: <span class='feels-like'>%.1f°C</span></p>" +
 						"<p>降水量: <span class='precip'>%.1f mm</span></p>" +
 						"</div>" +
-						// Windy API の地図表示領域
+						// Windy APIによる風の動きがわかるアニメーション地図の表示領域（下部に配置）
 						"<div id='windy-map' style='width: 100%%; height: 400px; margin-top: 20px;'></div>" +
-						// Windy API のスクリプト読み込み（onload イベントを指定）
-						"<script src='https://api.windy.com/assets/map-forecast.js' onload='initWindy()'></script>" +
-						// initWindy() を定義
+						"<script src='https://api.windy.com/assets/map-forecast.js'></script>" +
 						"<script>" +
-						"function initWindy() {" +
+						// 以下のオプションは任意で変更可能です（例：表示する座標やズームレベル）
 						"const options = { key: 'YOUR_WINDY_API_KEY', verbose: false, lat: 35, lon: 139, zoom: 5 };" +
 						"windyInit(options, document.getElementById('windy-map'));" +
-						"}" +
 						"</script>" +
 						"</div>",
 				weatherCondition, temperature, windSpeed, windDirection, humidity, pressure, feelsLike, precip);
 	}
+	// --- ここまで修正 ---
 }

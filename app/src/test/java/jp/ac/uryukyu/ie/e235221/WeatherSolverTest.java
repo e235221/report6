@@ -35,8 +35,7 @@ public class WeatherSolverTest {
 				"<div id='windy-map' style='width: 100%; height: 400px; margin-top: 20px;'></div>" +
 				"<script src='https://api.windy.com/assets/map-forecast.js'></script>" +
 				"<script>" +
-				"const options = { key: 'iN5NURX99S9qmVv59uaAX7q2NOC47pj3', verbose: false, lat: 35, lon: 139, zoom: 5 };"
-				+
+				"const options = { key: 'YOUR_WINDY_API_KEY', verbose: false, lat: 35, lon: 139, zoom: 5 };" +
 				"windyInit(options, document.getElementById('windy-map'));" +
 				"</script>" +
 				"</div>";
