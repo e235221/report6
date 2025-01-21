@@ -1,0 +1,66 @@
+body {
+	font-family: sans-serif;
+	margin: 20px;
+	background-color: #f8f8f8;
+}
+
+h1 {
+	color: #333;
+}
+
+.weather-info {
+	background-color: #ffffff;
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin-top: 20px;
+	border-radius: 5px;
+}
+
+.weather-condition {
+	color: #007BFF;
+	/* 天気の文言を青色に */
+	font-weight: bold;
+}
+
+.temperature {
+	font-size: 1.1em;
+	margin: 5px 0;
+}
+
+.highlight-temp {
+	color: red;
+	font-weight: bold;
+}
+
+/* 気温 */
+
+/* ここから修正 */
+.wind-speed::before {
+	content: "💨 ";
+	/* 風速 */
+}
+
+.wind-dir::before {
+	content: "🧭 ";
+	/* 風向き */
+}
+
+.humidity::before {
+	content: "💧 ";
+	/* 湿度*/
+}
+
+.pressure::before {
+	content: "🌡️";
+	/* 気圧 */
+}
+
+.feels-like::before {
+	content: "🌡️ ";
+	/* 温度計 */
+}
+
+.precip::before {
+	content: "☔ ";
+	/* 降水量 */
+}

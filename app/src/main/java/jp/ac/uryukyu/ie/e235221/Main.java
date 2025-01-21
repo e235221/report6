@@ -4,10 +4,9 @@ import static spark.Spark.*;
 
 public class Main {
 	public static void main(String[] args) {
-		// WeatherSolverインスタンスを作成
 		WeatherSolver solver = new WeatherSolver();
 
-		// 静的ファイルの場所を設定（HTMLファイルなどを保存する場所）
+		// 静的ファイル：HTMLファイルなどを保存する場所の設定
 		staticFiles.location("/public");
 
 		// 天気情報を取得するエンドポイント
@@ -21,16 +20,33 @@ public class Main {
 			try {
 				// 天気情報を取得
 				String weatherData = solver.fetchWeatherData(cityName);
-				// 取得した天気情報を解析
-				String weather = solver.parseWeatherData(weatherData);
-				// HTMLで表示
-				return "<h1>" + cityName + "の天気情報</h1>" +
-						"<p>" + weather + "</p>";
+				// 天気情報をHTML形式に整形
+				String weatherHtml = solver.parseWeatherData(weatherData);
+
+				// --- ここから修正 ---
+				// 取得した天気情報を見やすく表示するため，
+				// HTML全体を組み立てて返すように修正
+				String resultHtml = "<!DOCTYPE html>"
+						+ "<html lang='ja'>"
+						+ "<head>"
+						+ "<meta charset='UTF-8'>"
+						+ "<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
+						+ "<title>" + cityName + "の天気</title>"
+						+ "<link rel='stylesheet' href='/css/style.css'>" // CSSファイルの読み込み
+						+ "</head>"
+						+ "<body>"
+						+ "<h1>" + cityName + "の天気情報</h1>"
+						+ weatherHtml // parseWeatherDataで組み立てた天気情報ブロック
+						+ "</body>"
+						+ "</html>";
+				// --- ここまで修正 ---
+
+				return resultHtml;
 			} catch (Exception e) {
-				// エラーが発生した場合
 				res.status(500);
 				return "<h1>エラーが発生しました: " + e.getMessage() + "</h1>";
 			}
 		});
 	}
+
 }
